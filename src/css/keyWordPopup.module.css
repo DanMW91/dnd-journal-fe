@@ -1,0 +1,29 @@
+.hide {
+  display: none;
+}
+
+.infoBox {
+  z-index: 100;
+  position: absolute;
+  top: 0px;
+  right: 0;
+  /* left: 0; */
+  background: rgb(32, 46, 73);
+  padding: 40px;
+  border: thick double #32a1ce;
+  color: rgb(220, 224, 226);
+  width: 200px;
+  overflow-y: visible;
+}
+
+.keyWord {
+  /* z-index: -1; */
+  position: relative;
+  color: #8dd3ef;
+}
+
+.title {
+  margin: 5px;
+  margin-bottom: 15px;
+  border-bottom: 2px solid white;
+}

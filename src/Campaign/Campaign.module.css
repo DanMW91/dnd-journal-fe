@@ -1,0 +1,74 @@
+.campaignContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.campaignList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.campaignListItem {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.campaignListItem:hover {
+  background-color: #f7f7f7;
+  color: #333;
+}
+.navbar {
+  position: absolute;
+  top: 100;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  padding: 10px;
+  border-top: #eee;
+}
+
+.navbar ul {
+  display: flex;
+  list-style: none;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar li {
+  margin: 0 10px;
+  padding-left: 10px;
+  border-left: thick double #32a1ce;
+}
+
+.navbar a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+.navbar a:hover {
+  color: #f1f1f1;
+}
+
+.contentContainer {
+  padding-left: 5%;
+  padding-right: 5%;
+  margin: 0px;
+  margin-top: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

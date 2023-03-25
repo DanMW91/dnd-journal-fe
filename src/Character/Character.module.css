@@ -1,0 +1,55 @@
+.displayImage {
+  width: 20%;
+  border: 3px solid rgb(53, 53, 111);
+}
+
+.form {
+  width: 40%;
+  margin-top: 3%;
+  border: 3px solid rgb(53, 53, 111);
+}
+
+.detailsContainer {
+  padding: 5%;
+  padding-top: 2%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.multiDetailContainer {
+  margin-left: 25%;
+}
+
+.multiDetailContainer div {
+  margin-bottom: 20%;
+}
+
+.title {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.bioContainer {
+  width: 80%;
+  margin-left: 5%;
+  margin-right: 5%;
+}
+
+.mentionsContainer {
+  width: 30%;
+}
+
+.heading {
+  margin: 0;
+  margin-bottom: 2%;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.infoText {
+  font-style: italic;
+  font-size: small;
+  margin-bottom: 5%;
+}

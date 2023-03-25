@@ -1,0 +1,10 @@
+.formStyle {
+  justify-content: space-between;
+  border: 1px solid #ccc;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: fit-content;
+  margin: auto;
+}
