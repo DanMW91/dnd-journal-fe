@@ -45,7 +45,7 @@ const useImageUpload = ({ resourceType }) => {
     };
 
     const compressedFile = await imageCompression(file, options);
-
+    console.log(urls.getUrl);
     const s3Data = await fetch(urls.postUrl, {
       method: 'PUT',
       body: compressedFile,

@@ -10,6 +10,7 @@ const CREATE_CHARACTER_MUTATION = gql`
     $firstName: String!
     $lastName: String!
     $bio: String!
+    $backstory: String
     $campaignName: String!
     $imageUrl: String
   ) {
@@ -18,6 +19,7 @@ const CREATE_CHARACTER_MUTATION = gql`
       lastName: $lastName
       bio: $bio
       campaignName: $campaignName
+      backstory: $backstory
       imageUrl: $imageUrl
     ) {
       character {
@@ -40,6 +42,7 @@ function CharacterForm({ campaignId }) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [bio, setBio] = useState('');
+  const [backstory, setBackstory] = useState('');
 
   const [createCharacter, { loading, error }] = useMutation(
     CREATE_CHARACTER_MUTATION
@@ -56,6 +59,7 @@ function CharacterForm({ campaignId }) {
         lastName,
         bio,
         campaignName: campaign_name,
+        backstory,
         imageUrl: getUrl,
       },
     });
@@ -90,6 +94,13 @@ function CharacterForm({ campaignId }) {
           id="bio"
           value={bio}
           onChange={(event) => setBio(event.target.value)}
+        />
+
+        <label htmlFor="backstory">Backstory:</label>
+        <textarea
+          id="backstory"
+          value={backstory}
+          onChange={(event) => setBackstory(event.target.value)}
         />
 
         <label htmlFor="image">Image:</label>

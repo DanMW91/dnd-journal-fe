@@ -16,6 +16,7 @@ const GET_CHARACTER = gql`
       lastName
       bio
       imageUrl
+      backstory
     }
   }
 `;
@@ -53,6 +54,15 @@ const CharacterDetails = () => {
                 campaignId={data.character.campaign.id}
                 text={data.character.bio}
               />
+              {data.character?.backstory && (
+                <>
+                  <h3>Backstory:</h3>
+                  <KeyWordTextDisplay
+                    campaignId={data.character.campaign.id}
+                    text={data.character.backstory}
+                  />
+                </>
+              )}
             </div>
             <WriteUpMentions
               resourceType={'Character'}
