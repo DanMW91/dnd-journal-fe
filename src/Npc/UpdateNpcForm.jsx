@@ -8,6 +8,7 @@ import useImageUpload from '../hooks/useImageUpload';
 
 const UPDATE_NPC_MUTATION = gql`
   mutation UpdateNpc(
+    $id: ID!
     $firstName: String!
     $lastName: String!
     $description: String!
@@ -15,6 +16,7 @@ const UPDATE_NPC_MUTATION = gql`
     $imageUrl: String
   ) {
     updateNpc(
+      id: $id
       firstName: $firstName
       description: $description
       lastName: $lastName
@@ -38,6 +40,7 @@ function UpdateNpcForm() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [description, setDescription] = useState('');
+  const [id, setId] = useState('');
 
   const [updateNpc, { loading: updateLoading, error: updateError }] =
     useMutation(UPDATE_NPC_MUTATION);
@@ -53,6 +56,7 @@ function UpdateNpcForm() {
     setFirstName(data.npc.firstName);
     setLastName(data.npc.lastName);
     setDescription(data.npc.description);
+    setId(data.npc.id);
   }
 
   const handleSubmit = async (event) => {
@@ -62,6 +66,7 @@ function UpdateNpcForm() {
 
     await updateNpc({
       variables: {
+        id,
         firstName,
         lastName,
         description,
