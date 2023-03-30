@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import styles from './Character.module.css';
 import { useQuery, gql } from '@apollo/client';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import KeyWordTextDisplay from '../keyWordTextDisplay';
 import WriteUpMentions from './WriteUpMentions';
 
-const GET_CHARACTER = gql`
+export const GET_CHARACTER = gql`
   query Character($characterName: String!, $campaignName: String!) {
     character(characterName: $characterName, campaignName: $campaignName) {
       campaign {
@@ -17,6 +17,9 @@ const GET_CHARACTER = gql`
       bio
       imageUrl
       backstory
+      keyWords {
+        keyWord
+      }
     }
   }
 `;
@@ -41,6 +44,11 @@ const CharacterDetails = () => {
           <h2 className={styles.heading}>
             {data.character.firstName} {data.character.lastName}
           </h2>
+          <Link
+            to={`/campaigns/${params.campaign_name}/characters/${params.character_name}/edit`}
+          >
+            <button>Edit Character</button>
+          </Link>
           <div className={styles.detailsContainer}>
             <div className={styles.bioContainer}>
               {data.character.imageUrl && (

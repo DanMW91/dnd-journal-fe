@@ -8,6 +8,7 @@ import useImageUpload from '../hooks/useImageUpload';
 
 const UPDATE_NOTABLE_GROUP_MUTATION = gql`
   mutation UpdateNotableGroup(
+    $id: ID!
     $name: String!
     $description: String!
     $location: String!
@@ -16,6 +17,7 @@ const UPDATE_NOTABLE_GROUP_MUTATION = gql`
     $campaignName: String!
   ) {
     updateNotableGroup(
+      id: $id
       name: $name
       description: $description
       location: $location
@@ -39,6 +41,7 @@ function UpdateNotableGroupForm() {
   const [npcs, setNpcs] = useState('');
   const [characters, setCharacters] = useState('');
   const [location, setLocation] = useState('');
+  const [id, setId] = useState('');
 
   const [updateNotableGroup, { loading: updateLoading, error: updateError }] =
     useMutation(UPDATE_NOTABLE_GROUP_MUTATION);
@@ -75,6 +78,7 @@ function UpdateNotableGroupForm() {
     setCharacters(characterNames || '');
     setNpcs(npcNames || '');
     setLocation(data.notableGroup?.location?.name || '');
+    setId(data.notableGroup.id);
   }
 
   const handleSubmit = async (event) => {
@@ -82,6 +86,7 @@ function UpdateNotableGroupForm() {
 
     await updateNotableGroup({
       variables: {
+        id,
         name,
         description,
         characters,

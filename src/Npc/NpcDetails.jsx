@@ -16,6 +16,9 @@ export const GET_NPC = gql`
       lastName
       description
       imageUrl
+      keyWords {
+        keyWord
+      }
     }
   }
 `;

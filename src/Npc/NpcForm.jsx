@@ -12,6 +12,7 @@ const CREATE_NPC_MUTATION = gql`
     $description: String!
     $campaignName: String!
     $imageUrl: String
+    $keyWords: String
   ) {
     createNpc(
       firstName: $firstName
@@ -19,6 +20,7 @@ const CREATE_NPC_MUTATION = gql`
       description: $description
       campaignName: $campaignName
       imageUrl: $imageUrl
+      keyWords: $keyWords
     ) {
       npc {
         id
@@ -40,6 +42,7 @@ function NpcForm({ campaignId }) {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [description, setDescription] = useState('');
+  const [keyWords, setKeyWords] = useState('');
 
   const [createNpc, { loading, error }] = useMutation(CREATE_NPC_MUTATION);
 
@@ -55,6 +58,7 @@ function NpcForm({ campaignId }) {
         description,
         campaignName: campaign_name,
         imageUrl: getUrl,
+        keyWords,
       },
     });
     navigate(`/campaigns/${campaign_name}/npcs`);
@@ -89,6 +93,19 @@ function NpcForm({ campaignId }) {
         required={true}
         onChange={(event) => setDescription(event.target.value)}
       />
+
+      <label htmlFor="keyWords">Key Words:</label>
+      <textarea
+        id="keyWords"
+        value={keyWords}
+        onChange={(event) => setKeyWords(event.target.value)}
+      />
+      <div className={styles.infoText}>
+        {
+          'Enter additional taggable keywords separated by a comma (e.g "JT, Jim Tim"). Be aware that these will need to be unique as well.'
+        }
+      </div>
+
       <label htmlFor="image">Image:</label>
       <input onChange={fileOnChangeHandler} type="file" id="image" />
 

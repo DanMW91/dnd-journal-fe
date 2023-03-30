@@ -1,68 +1,71 @@
 import React, { useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
-import styles from '../Character/Character.module.css';
+import styles from './Character.module.css';
 import { gql } from '@apollo/client';
 import { useNavigate, useParams } from 'react-router-dom';
-import { GET_NPC } from './NpcDetails';
 import useImageUpload from '../hooks/useImageUpload';
+import { GET_CHARACTER } from './CharacterDetails';
 
-const UPDATE_NPC_MUTATION = gql`
-  mutation UpdateNpc(
+const UPDATE_CHARACTER_MUTATION = gql`
+  mutation UpdateCharacter(
     $id: ID!
     $firstName: String!
     $lastName: String!
-    $description: String!
+    $bio: String!
+    $backstory: String
     $campaignName: String!
     $imageUrl: String
     $keyWords: String
   ) {
-    updateNpc(
+    updateCharacter(
       id: $id
       firstName: $firstName
-      description: $description
+      bio: $bio
+      backstory: $backstory
       lastName: $lastName
       campaignName: $campaignName
       imageUrl: $imageUrl
       keyWords: $keyWords
     ) {
-      npc {
+      character {
         id
       }
     }
   }
 `;
 
-function UpdateNpcForm() {
+function UpdateCharacterForm() {
   const navigate = useNavigate();
-  const { campaign_name, npc_name } = useParams();
+  const { campaign_name, character_name } = useParams();
   const { fileOnChangeHandler, submitHandler } = useImageUpload({
-    resourceType: 'npc',
+    resourceType: 'character',
   });
-
+  const [id, setId] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
-  const [description, setDescription] = useState('');
-  const [id, setId] = useState('');
+  const [bio, setBio] = useState('');
+  const [backstory, setBackstory] = useState('');
   const [keyWords, setKeyWords] = useState('');
 
-  const [updateNpc, { loading: updateLoading, error: updateError }] =
-    useMutation(UPDATE_NPC_MUTATION);
-
-  const { loading, error, data } = useQuery(GET_NPC, {
+  const { loading, error, data } = useQuery(GET_CHARACTER, {
     variables: {
-      npcName: npc_name,
+      characterName: character_name,
       campaignName: campaign_name,
     },
   });
 
+  const [updateCharacter, { loading: updateLoading, error: updateError }] =
+    useMutation(UPDATE_CHARACTER_MUTATION);
+
   if (data && !firstName) {
-    setFirstName(data.npc.firstName);
-    setLastName(data.npc.lastName);
-    setDescription(data.npc.description);
-    setId(data.npc.id);
-    if (data.npc.keyWords) {
+    setFirstName(data.character.firstName);
+    setLastName(data.character.lastName);
+    setBio(data.character.bio);
+    setId(data.character.id);
+    setBackstory(data.character.backstory);
+    if (data.character.keyWords) {
       setKeyWords(
-        data.npc.keyWords
+        data.character.keyWords
           .map((kw) => {
             return kw.keyWord;
           })
@@ -76,30 +79,30 @@ function UpdateNpcForm() {
 
     const { getUrl } = await submitHandler();
 
-    await updateNpc({
+    await updateCharacter({
       variables: {
         id,
         firstName,
         lastName,
-        description,
+        bio,
         campaignName: campaign_name,
+        backstory,
         imageUrl: getUrl,
         keyWords,
       },
     });
-    navigate(`/campaigns/${campaign_name}/npcs`);
+    navigate(`/campaigns/${campaign_name}/characters`);
     setFirstName('');
     setLastName('');
-    setDescription('');
+    setBio('');
   };
 
   return (
     <>
-      <h3>Edit NPC</h3>
+      <h2>Update Character</h2>
       <form className={styles.form} onSubmit={handleSubmit}>
         <label htmlFor="firstName">First Name:</label>
         <input
-          required={true}
           type="text"
           id="firstName"
           value={firstName}
@@ -114,12 +117,18 @@ function UpdateNpcForm() {
           onChange={(event) => setLastName(event.target.value)}
         />
 
-        <label htmlFor="description">description:</label>
+        <label htmlFor="bio">Bio:</label>
         <textarea
-          required={true}
-          id="description"
-          value={description}
-          onChange={(event) => setDescription(event.target.value)}
+          id="bio"
+          value={bio}
+          onChange={(event) => setBio(event.target.value)}
+        />
+
+        <label htmlFor="backstory">Backstory:</label>
+        <textarea
+          id="backstory"
+          value={backstory}
+          onChange={(event) => setBackstory(event.target.value)}
         />
 
         <label htmlFor="keyWords">Key Words:</label>
@@ -147,4 +156,4 @@ function UpdateNpcForm() {
   );
 }
 
-export default UpdateNpcForm;
+export default UpdateCharacterForm;

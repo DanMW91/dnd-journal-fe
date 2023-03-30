@@ -13,6 +13,7 @@ const CREATE_CHARACTER_MUTATION = gql`
     $backstory: String
     $campaignName: String!
     $imageUrl: String
+    $keyWords: String
   ) {
     createCharacter(
       firstName: $firstName
@@ -21,6 +22,7 @@ const CREATE_CHARACTER_MUTATION = gql`
       campaignName: $campaignName
       backstory: $backstory
       imageUrl: $imageUrl
+      keyWords: $keyWords
     ) {
       character {
         id
@@ -43,6 +45,7 @@ function CharacterForm({ campaignId }) {
   const [lastName, setLastName] = useState('');
   const [bio, setBio] = useState('');
   const [backstory, setBackstory] = useState('');
+  const [keyWords, setKeyWords] = useState('');
 
   const [createCharacter, { loading, error }] = useMutation(
     CREATE_CHARACTER_MUTATION
@@ -61,6 +64,7 @@ function CharacterForm({ campaignId }) {
         campaignName: campaign_name,
         backstory,
         imageUrl: getUrl,
+        keyWords,
       },
     });
     navigate(`/campaigns/${campaign_name}/characters`);
@@ -102,6 +106,18 @@ function CharacterForm({ campaignId }) {
           value={backstory}
           onChange={(event) => setBackstory(event.target.value)}
         />
+
+        <label htmlFor="keyWords">Key Words:</label>
+        <textarea
+          id="keyWords"
+          value={keyWords}
+          onChange={(event) => setKeyWords(event.target.value)}
+        />
+        <div className={styles.infoText}>
+          {
+            'Enter additional taggable keywords separated by a comma (e.g "JT, Jim Tim"). Be aware that these will need to be unique as well.'
+          }
+        </div>
 
         <label htmlFor="image">Image:</label>
         <input onChange={fileOnChangeHandler} type="file" id="image" />

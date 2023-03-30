@@ -14,6 +14,7 @@ import CharacterList from './Character/characterList';
 import CampaignPage from './Campaign/CampaignPage';
 import CharacterDetails from './Character/CharacterDetails';
 import CharacterForm from './Character/CharacterForm';
+import UpdateCharacterForm from './Character/UpdateCharacterForm';
 import WriteUpList from './WriteUp/WriteUpList';
 import WriteUpDetail from './WriteUp/WriteUpDetail';
 import WriteUpForm from './WriteUp/WriteUpForm';
@@ -99,6 +100,10 @@ const App = () => {
                 path="characters/:character_name"
                 element={<CharacterDetails />}
               />
+              <Route
+                path="characters/:character_name/edit"
+                element={<UpdateCharacterForm />}
+              />
               <Route path="write-ups/" element={<WriteUpList />}></Route>
               <Route path="write-ups/new" element={<WriteUpForm />} />
               <Route
@@ -144,7 +149,7 @@ const App = () => {
                 path="notablegroups/:group_name/edit"
                 element={<UpdateNotableGroupForm />}
               ></Route>
-              <Route path="write-ups" element={<CharacterList />}></Route>
+              {/* <Route path="write-ups" element={<CharacterList />}></Route> */}
             </Route>
           </Routes>
         </Router>

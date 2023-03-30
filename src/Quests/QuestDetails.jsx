@@ -31,11 +31,15 @@ export const GET_QUEST = gql`
 const QuestDetails = () => {
   const { quest_title, campaign_name } = useParams();
 
-  const { loading, error, data } = useQuery(GET_QUEST, {
+  const { loading, error, data, refetch } = useQuery(GET_QUEST, {
     variables: {
       questTitle: quest_title,
       campaignName: campaign_name,
     },
+  });
+
+  useEffect(() => {
+    refetch();
   });
 
   if (loading) return <p>Loading...</p>;
