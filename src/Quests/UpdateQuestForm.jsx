@@ -10,7 +10,6 @@ function UpdateQuestForm() {
   const navigate = useNavigate();
   const { campaign_name, quest_title } = useParams();
 
-  const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [reward, setReward] = useState('');
   const [npc, setNpc] = useState('');
@@ -26,8 +25,7 @@ function UpdateQuestForm() {
     },
   });
 
-  if (data && !title) {
-    setTitle(data.quest.title);
+  if (data && !description) {
     setDescription(data.quest.description);
     setReward(data.quest?.reward || '');
     setNpc(data.quest?.npc?.firstName || '');
@@ -40,7 +38,6 @@ function UpdateQuestForm() {
     await updateQuest({
       variables: {
         questId: data.quest.id,
-        title,
         description,
         reward,
         campaignName: campaign_name,
@@ -50,7 +47,6 @@ function UpdateQuestForm() {
       },
     });
     navigate(`/campaigns/${campaign_name}/quests`);
-    setTitle('');
     setDescription('');
     setReward('');
     setNpc('');
@@ -61,15 +57,6 @@ function UpdateQuestForm() {
     <>
       <h3>Edit Quest</h3>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <label htmlFor="title">Title:</label>
-        <input
-          required={true}
-          type="text"
-          id="title"
-          value={title}
-          onChange={(event) => setTitle(event.target.value)}
-        />
-
         <label htmlFor="description">Description:</label>
         <textarea
           required={true}
