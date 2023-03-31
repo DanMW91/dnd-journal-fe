@@ -40,7 +40,7 @@ const useImageUpload = ({ resourceType }) => {
     if (!file) return { getUrl: null };
 
     const options = {
-      maxSizeMB: 0.5,
+      maxSizeMB: 1,
       maxWidthOrHeight: 720,
     };
 

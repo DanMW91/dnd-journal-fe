@@ -34,6 +34,7 @@ import NotableGroupForm from './NotableGroup/NotableGroupForm';
 import NotableGroupList from './NotableGroup/NotableGroupList';
 import NotableGroupDetails from './NotableGroup/NotableGroupDetails';
 import UpdateNotableGroupForm from './NotableGroup/UpdateNotableGroupForm';
+import Map from './Location/Map/Map';
 
 const client = new ApolloClient({
   uri: import.meta.env.PROD
@@ -91,6 +92,7 @@ const App = () => {
 
           <Routes>
             <Route path="/" element={<HomeForms />}></Route>
+            <Route path="/map" element={<Map />}></Route>
             <Route path="/campaigns" element={<CampaignPage />}></Route>
             <Route
               path="/campaigns/:campaign_name/"
@@ -134,6 +136,10 @@ const App = () => {
               <Route
                 path="locations/:location_name"
                 element={<LocationDetails />}
+              ></Route>
+              <Route
+                path="locations/:location_name/:map_id"
+                element={<Map />}
               ></Route>
               <Route
                 path="notablegroups"
