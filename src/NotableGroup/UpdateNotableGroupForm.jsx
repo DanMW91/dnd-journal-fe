@@ -138,6 +138,11 @@ function UpdateNotableGroupForm() {
           value={characters}
           onChange={(event) => setCharacters(event.target.value)}
         />
+        <div className={styles.infoText}>
+          {
+            'Enter NPCs and Characters by their first name (case insensitive) separated by a comma (e.g "jeff, dave").'
+          }
+        </div>
         <label htmlFor="location">Location:</label>
         <input
           id="location"
