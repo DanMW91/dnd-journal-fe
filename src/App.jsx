@@ -9,6 +9,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import HomeForms from './HomeForms/homeForms';
 import styles from './App.module.css';
 import './App.css';
+import ScrollToTop from './utils/ScrollToTop';
 import CampaignContainer from './Campaign/CampaignContainer';
 import CharacterList from './Character/characterList';
 import CampaignPage from './Campaign/CampaignPage';
@@ -67,6 +68,7 @@ const App = () => {
     <ApolloProvider client={client}>
       <AuthContext.Provider value={{ authState, setAuthState }}>
         <Router>
+          <ScrollToTop />
           <nav className={styles.navbar}>
             <ul>
               {!authState.loggedIn && (
