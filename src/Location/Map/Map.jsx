@@ -108,6 +108,7 @@ const Map = () => {
     if (data.createMarker.marker.id) {
       refetch();
       setClickedPosition(null);
+      setResourceName('');
     }
   };
 
